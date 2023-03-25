@@ -9,12 +9,18 @@ CLANG=clang-15
 endif
 FLAGS = -flto -O3 -nostdlib -fno-builtin -ffreestanding -mexec-model=reactor --target=wasm32 -Wl,--strip-all -Wl,--initial-memory=196608 -Wl,--max-memory=196608 -Wl,--no-entry -Wl,--allow-undefined -Wl,--export-dynamic
 
-all: verify.wasm
+all: verify.wasm inputs.sh vk.h
+
+vk.h:
+	node extractor/build/vkgen.js extractor/circuit/a.zkey > vk.h
+
+inputs.sh:
+	node extractor/build/inputgen.js > inputs.sh
 
 sdk.wasm:
 	sh $(SDKDIR)/sdk/scripts/build.sh sdk.wasm
 
-verify.wasm: $(CFILES) sdk.wasm
+verify.wasm: $(CFILES) sdk.wasm vk.h
 	$(CLANG) -o $@ $(CFILES) sdk.wasm $(FLAGS) $(CFLAGS)
 
 
