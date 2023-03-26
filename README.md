@@ -1,4 +1,9 @@
 # groth16-zkwasm
+
+This project is trying to run the groth16 verifier in zkWasm virtual machine. The idea is simple, write the groth16 verifier in C and use the pairing host circuit to provide zkWASM user the ability to combine groth16 proofs with wasm applications.
+
+There are a few reasons to do the integration. In particular, we can use this to provide the ability to hide some private witnesses when we are using the zkWASM machine in a cloud prover setup.
+
 ## Requirements
 * Install zkWASM v2 with host circuits support (~/zkWasm)
 * Sync zkWasm-C submodule
