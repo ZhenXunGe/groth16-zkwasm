@@ -79,6 +79,7 @@ void verify(uint64_t *vk, uint64_t* imsm, uint64_t* proof) {
   // fetch results
   for(i=0;i<(LIMBSZ * 12);i++) {
       result[i] = bn254pair_pop();
+      //require(result[i] == vk[i]);
   }
 }
 
@@ -99,7 +100,7 @@ static inline void read_groth16_input(int input_index) {
 
 static inline void prepare_inputs(uint32_t nb_input) {
   for(int i=0; i<nb_input; i++) {
-    read_groth16_input(i);
+    //read_groth16_input(i);
   }
   bn254msm(nb_input+1, gamma_abc_g1s, inputs_msm);
 }
@@ -114,5 +115,5 @@ int zkmain() {
     proof[i] = wasm_input(0);
   }
   verify(vk, inputs_msm, proof);
-  return 1;
+  return 0;
 }

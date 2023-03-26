@@ -12,7 +12,7 @@ FLAGS = -flto -O3 -nostdlib -fno-builtin -ffreestanding -mexec-model=reactor --t
 all: verify.wasm inputs.sh vk.h
 
 vk.h:
-	node extractor/build/vkgen.js extractor/circuit/a.zkey > vk.h
+	node extractor/build/vkgen.js > vk.h
 
 inputs.sh:
 	node extractor/build/inputgen.js > inputs.sh
@@ -27,3 +27,4 @@ verify.wasm: $(CFILES) sdk.wasm vk.h
 clean:
 	sh $(SDKDIR)/sdk/scripts/clean.sh
 	rm -f *.wasm *.wat
+	rm vk.h inputs.sh

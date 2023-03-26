@@ -1,13 +1,11 @@
 import { bn254 } from '@noble/curves/bn';
+import * as vk from "./circuit/zkey.json";
 const snarkjs = require("snarkjs");
 
 import { fp2ToLimbs, g2ToLimbs, g1ToLimbs, gtToLimbs} from './utils';
 // If you're using single file, use global variable instead: `window.nobleBls12381`
  
 async function main() {
-
-  const vk = await snarkjs.zKey.exportVerificationKey(process.argv[2]);
-  //console.log("vk", vk);
 
   const prepair = {
     c0: {
@@ -46,8 +44,8 @@ async function main() {
         BigInt(vk.vk_gamma_2[0][1]),
       ],
       [
-        BigInt(vk.vk_delta_2[1][0]),
-        BigInt(vk.vk_delta_2[1][1]),
+        BigInt(vk.vk_gamma_2[1][0]),
+        BigInt(vk.vk_gamma_2[1][1]),
       ],
     ];
     
