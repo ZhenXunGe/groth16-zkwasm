@@ -92,15 +92,15 @@ uint64_t vk[VK_LEN];
 static inline void read_groth16_input(int input_index) {
   // The first slot is always 1 and we start at the snd slot
   int idx = input_index+1;
-  gamma_abc_g1s[(LIMBSZ*2+1+4)*idx] = wasm_input(1);
-  gamma_abc_g1s[(LIMBSZ*2+1+4)*idx+1] = wasm_input(1);
-  gamma_abc_g1s[(LIMBSZ*2+1+4)*idx+2] = wasm_input(1);
-  gamma_abc_g1s[(LIMBSZ*2+1+4)*idx+3] = wasm_input(1);
+  gamma_abc_g1s[(LIMBSZ*2+1+4)*idx+LIMBSZ*2+1] = wasm_input(1);
+  gamma_abc_g1s[(LIMBSZ*2+1+4)*idx+LIMBSZ*2+1+1] = wasm_input(1);
+  gamma_abc_g1s[(LIMBSZ*2+1+4)*idx+LIMBSZ*2+1+2] = wasm_input(1);
+  gamma_abc_g1s[(LIMBSZ*2+1+4)*idx+LIMBSZ*2+1+3] = wasm_input(1);
 }
 
 static inline void prepare_inputs(uint32_t nb_input) {
   for(int i=0; i<nb_input; i++) {
-    //read_groth16_input(i);
+    read_groth16_input(i);
   }
   bn254msm(nb_input+1, gamma_abc_g1s, inputs_msm);
 }
