@@ -1,10 +1,10 @@
 import { bn254 } from '@noble/curves/bn';
-import * as proof_json from "./circuit/proof.json";
-import * as input_json from "./circuit/input.json";
+import * as proof_json from "../proof/proof.json";
+import * as input_json from "../proof/input.json";
 import { fp2ToLimbs, g2ToLimbs, g1ToLimbs, gtToLimbs} from './utils';
 
 function setPublicInput(nbpubkey: number) {
-    console.log(`NB_PUBKEY=${nbpubkey}`); 
+    console.log(`NB_PUBKEY=${nbpubkey}`);
 }
 
 function bn254ToLimbs(x: bigint, r: Array<string>) {

@@ -11,7 +11,7 @@ NB_PUBKEY=2
 INSTANCES=
 PROOFS=
 
-source ./inputs.sh
+source ./proof/inputs.sh
 
 set -x
 

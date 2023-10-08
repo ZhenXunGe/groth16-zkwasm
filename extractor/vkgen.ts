@@ -1,5 +1,5 @@
 import { bn254 } from '@noble/curves/bn';
-import * as vk from "./circuit/zkey.json";
+import * as vk from "../setup/zkey.json";
 const snarkjs = require("snarkjs");
 
 import { fp2ToLimbs, g2ToLimbs, g1ToLimbs, gtToLimbs} from './utils';

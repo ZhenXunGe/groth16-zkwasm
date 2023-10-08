@@ -111,7 +111,7 @@ static inline void prepare_inputs(uint32_t nb_input) {
 __attribute__((visibility("default")))
 int zkmain() {
 // Initialize gamma_abc_g1s and vk
-#include "vk.h"
+#include "setup/vk.h"
   int i;
   prepare_inputs(1);
   for(i=0;i<PROOF_LEN;i++) {
