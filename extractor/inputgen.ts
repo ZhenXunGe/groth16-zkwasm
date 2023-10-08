@@ -18,9 +18,9 @@ function bn254ToLimbs(x: bigint, r: Array<string>) {
     acc = l;
   }
 }
-  
+
 async function main() {
-  const inputs = [ 
+  const inputs = [
       BigInt(input_json.a),
   ];
 

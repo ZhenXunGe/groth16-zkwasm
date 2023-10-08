@@ -1,3 +1,4 @@
 [submodule "zkWasm-C"]
 	path = zkWasm-C
 	url = https://github.com/DelphinusLab/zkWasm-C
+    branch = main

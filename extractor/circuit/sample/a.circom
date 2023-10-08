@@ -1,16 +1,12 @@
-pragma circom 2.0.0;
+template TEST() {
 
-/*This circuit template checks that c is the multiplication of a and b.*/  
+   // Declaration of signals.
+   signal input a;
+   signal input b;
+   signal output c;
 
-template IsOne() {  
-
-   // Declaration of signals.  
-   signal input a;  
-   signal output b;  
-
-   // Constraints.  
-   a === 1;
-   b <== a;
+   // Constraints.
+   c <== a * b;
 }
 
-component main = IsOne();
+component main = TEST();

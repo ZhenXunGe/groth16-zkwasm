@@ -1,4 +1,4 @@
-#define LIMBSZ 6
+#define LIMBSZ 5
 #define INPUTSZ 1
 #define G1_LEN (LIMBSZ*2+1)
 #define G2_LEN (LIMBSZ*4+1)
@@ -79,6 +79,8 @@ void verify(uint64_t *vk, uint64_t* imsm, uint64_t* proof) {
   // fetch results
   for(i=0;i<(LIMBSZ * 12);i++) {
       result[i] = bn254pair_pop();
+      wasm_dbg(result[i]);
+      wasm_dbg(vk[i]);
       //require(result[i] == vk[i]);
   }
 }
@@ -92,10 +94,11 @@ uint64_t vk[VK_LEN];
 static inline void read_groth16_input(int input_index) {
   // The first slot is always 1 and we start at the snd slot
   int idx = input_index+1;
-  gamma_abc_g1s[(LIMBSZ*2+1+4)*idx+LIMBSZ*2+1] = wasm_input(1);
-  gamma_abc_g1s[(LIMBSZ*2+1+4)*idx+LIMBSZ*2+1+1] = wasm_input(1);
-  gamma_abc_g1s[(LIMBSZ*2+1+4)*idx+LIMBSZ*2+1+2] = wasm_input(1);
-  gamma_abc_g1s[(LIMBSZ*2+1+4)*idx+LIMBSZ*2+1+3] = wasm_input(1);
+  // filling the scalar which is equal to the inputs of the circuits
+  gamma_abc_g1s[(LIMBSZ*2+1+4)*idx] = wasm_input(1);
+  gamma_abc_g1s[(LIMBSZ*2+1+4)*idx+1] = wasm_input(1);
+  gamma_abc_g1s[(LIMBSZ*2+1+4)*idx+2] = wasm_input(1);
+  gamma_abc_g1s[(LIMBSZ*2+1+4)*idx+3] = wasm_input(1);
 }
 
 static inline void prepare_inputs(uint32_t nb_input) {

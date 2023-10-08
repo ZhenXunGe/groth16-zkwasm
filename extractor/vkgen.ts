@@ -4,7 +4,7 @@ const snarkjs = require("snarkjs");
 
 import { fp2ToLimbs, g2ToLimbs, g1ToLimbs, gtToLimbs} from './utils';
 // If you're using single file, use global variable instead: `window.nobleBls12381`
- 
+
 async function main() {
 
   const prepair = {
@@ -48,7 +48,7 @@ async function main() {
         BigInt(vk.vk_gamma_2[1][1]),
       ],
     ];
-    
+
     const delta2 = [
       [
         BigInt(vk.vk_delta_2[0][0]),
@@ -59,7 +59,7 @@ async function main() {
         BigInt(vk.vk_delta_2[1][1]),
       ],
     ];
-    
+
     const ics = [
       [
         BigInt(vk.IC[0][0]),
@@ -70,21 +70,24 @@ async function main() {
         BigInt(vk.IC[1][1]),
       ]
     ];
- 
+
+  // establish the g1s for calculation of msm of inputs
   var icssetup: Array<string> = [];
   for (var ic of ics) {
-    g1ToLimbs(ic, icssetup);
-    icssetup.push("0");
     //push default scalar
     icssetup.push("1");
     icssetup.push("0");
     icssetup.push("0");
+    icssetup.push("0");
+    //push points
+    g1ToLimbs(ic, icssetup);
     icssetup.push("0");
   }
   for (var idx in icssetup) {
     console.log(`gamma_abc_g1s[${idx}] = ${icssetup[idx]};`)
   }
 
+  // establish the vkey for this specific circuit
   var vksetup:Array<string> = [];
   gtToLimbs(prepair, vksetup);
   g2ToLimbs(gamma2, vksetup);

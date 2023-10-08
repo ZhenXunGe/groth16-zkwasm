@@ -25,8 +25,8 @@ export function hexToG1(pubkey0x: string) {
 
 export function fpToLimbs(x: bigint, r: Array<string>) {
   var acc = x;
-  for (var i=0;i<6;i++) {
-    const b = 0x200000000000n;
+  for (var i=0;i<5;i++) {
+    const b = 0x40000000000000n;
     const l = acc / b;
     const rem = acc % b;
     r.push(rem.toString());
